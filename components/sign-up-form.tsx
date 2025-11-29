@@ -16,9 +16,12 @@ export function SignUpForm() {
   const [password, setPassword] = useState('');
   const passwordInputRef = useRef<TextInput>(null);
   const [error, setError] = useState<{ email?: string; password?: string }>({});
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit() {
     if (!isLoaded) return;
+
+    setIsLoading(true);
 
     // Start sign-up process using email and password provided
     try {
@@ -42,6 +45,8 @@ export function SignUpForm() {
       }
       console.error(JSON.stringify(err, null, 2));
     }
+
+    setIsLoading(false);
   }
 
   function onEmailSubmitEditing() {
@@ -92,7 +97,7 @@ export function SignUpForm() {
                 <Text className="text-sm font-medium text-destructive">{error.password}</Text>
               ) : null}
             </View>
-            <Button className="w-full" onPress={onSubmit}>
+            <Button className="w-full" onPress={onSubmit} disabled={isLoading}>
               <Text>Continue</Text>
             </Button>
           </View>
