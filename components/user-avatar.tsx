@@ -1,12 +1,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Text } from './ui/text';
 import { useUser } from '@clerk/clerk-expo';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 export function UserAvatar(props: Omit<React.ComponentProps<typeof Avatar>, 'alt'>) {
   const { user } = useUser();
 
-  const { initials, imageSource, userName } = React.useMemo(() => {
+  const { initials, imageSource, userName } = useMemo(() => {
     const userName = user?.fullName || user?.emailAddresses[0]?.emailAddress || 'Unknown';
     const initials = userName
       .split(' ')

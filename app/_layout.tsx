@@ -9,7 +9,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'nativewind';
-import * as React from 'react';
+import React, { useEffect } from 'react';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -35,7 +35,7 @@ SplashScreen.preventAutoHideAsync();
 function Routes() {
   const { isSignedIn, isLoaded } = useAuth();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoaded) {
       // Hide splash screen, but catch any errors (e.g., if already hidden or on modal view controllers)
       SplashScreen.hideAsync().catch(() => {

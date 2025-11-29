@@ -6,14 +6,14 @@ import { Text } from '@/components/ui/text';
 import { useSignIn } from '@clerk/clerk-expo';
 import { router } from 'expo-router';
 import { useLocalSearchParams } from 'expo-router/build/hooks';
-import * as React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 
 export function ForgotPasswordForm() {
   const { email: emailParam = '' } = useLocalSearchParams<{ email?: string }>();
-  const [email, setEmail] = React.useState(emailParam);
+  const [email, setEmail] = useState(emailParam);
   const { signIn, isLoaded } = useSignIn();
-  const [error, setError] = React.useState<{ email?: string; password?: string }>({});
+  const [error, setError] = useState<{ email?: string; password?: string }>({});
 
   const onSubmit = async () => {
     if (!email) {

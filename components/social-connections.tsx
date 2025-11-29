@@ -4,7 +4,7 @@ import { useSSO, type StartSSOFlowParams } from '@clerk/clerk-expo';
 import * as AuthSession from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 import { useColorScheme } from 'nativewind';
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { Image, Platform, View, type ImageSourcePropType } from 'react-native';
 
 WebBrowser.maybeCompleteAuthSession();
@@ -88,7 +88,7 @@ export function SocialConnections() {
 const useWarmUpBrowser = Platform.select({
   web: () => {},
   default: () => {
-    React.useEffect(() => {
+    useEffect(() => {
       // Preloads the browser for Android devices to reduce authentication load time
       // See: https://docs.expo.dev/guides/authentication/#improving-user-experience
       void WebBrowser.warmUpAsync();

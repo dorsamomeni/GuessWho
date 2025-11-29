@@ -5,14 +5,14 @@ import { Text } from '@/components/ui/text';
 import { useAuth, useUser } from '@clerk/clerk-expo';
 import type { TriggerRef } from '@rn-primitives/popover';
 import { LogOutIcon, PlusIcon, SettingsIcon } from 'lucide-react-native';
-import * as React from 'react';
+import React, { useRef } from 'react';
 import { View } from 'react-native';
 import { UserAvatar } from './user-avatar';
 
 export function UserMenu() {
   const { user } = useUser();
   const { signOut } = useAuth();
-  const popoverTriggerRef = React.useRef<TriggerRef>(null);
+  const popoverTriggerRef = useRef<TriggerRef>(null);
 
   async function onSignOut() {
     popoverTriggerRef.current?.close();

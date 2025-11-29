@@ -5,8 +5,9 @@ import { Label } from '@/components/ui/label';
 import { Text } from '@/components/ui/text';
 import { useSignUp } from '@clerk/clerk-expo';
 import { router, useLocalSearchParams } from 'expo-router';
-import * as React from 'react';
+import React, { useState } from 'react';
 import { type TextStyle, View } from 'react-native';
+import { useCountdown } from '@/hooks/useCountdown';
 
 const RESEND_CODE_INTERVAL_SECONDS = 30;
 
@@ -15,8 +16,8 @@ const TABULAR_NUMBERS_STYLE: TextStyle = { fontVariant: ['tabular-nums'] };
 export function VerifyEmailForm() {
   const { signUp, setActive, isLoaded } = useSignUp();
   const { email = '' } = useLocalSearchParams<{ email?: string }>();
-  const [code, setCode] = React.useState('');
-  const [error, setError] = React.useState('');
+  const [code, setCode] = useState('');
+  const [error, setError] = useState('');
   const { countdown, restartCountdown } = useCountdown(RESEND_CODE_INTERVAL_SECONDS);
 
   async function onSubmit() {
@@ -114,42 +115,4 @@ export function VerifyEmailForm() {
       </Card>
     </View>
   );
-}
-
-function useCountdown(seconds = 30) {
-  const [countdown, setCountdown] = React.useState(seconds);
-  const intervalRef = React.useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const startCountdown = React.useCallback(() => {
-    setCountdown(seconds);
-
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-
-    intervalRef.current = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-          }
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-  }, [seconds]);
-
-  React.useEffect(() => {
-    startCountdown();
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [startCountdown]);
-
-  return { countdown, restartCountdown: startCountdown };
 }

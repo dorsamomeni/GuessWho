@@ -6,7 +6,7 @@ import { useUser } from '@clerk/clerk-expo';
 import { Link, Stack, useRouter } from 'expo-router';
 import { MoonStarIcon, XIcon, SunIcon } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
-import * as React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Image, type ImageStyle, View } from 'react-native';
 
 const LOGO = {
@@ -37,9 +37,9 @@ export default function Screen() {
   const { colorScheme } = useColorScheme();
   const { user, isLoaded } = useUser();
   const router = useRouter();
-  const hasRedirectedRef = React.useRef(false);
+  const hasRedirectedRef = useRef(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       isLoaded &&
       user &&

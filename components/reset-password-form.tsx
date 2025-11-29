@@ -5,15 +5,15 @@ import { Label } from '@/components/ui/label';
 import { Text } from '@/components/ui/text';
 import { useSignIn } from '@clerk/clerk-expo';
 import { router } from 'expo-router';
-import * as React from 'react';
+import React, { useState, useRef } from 'react';
 import { TextInput, View } from 'react-native';
 
 export function ResetPasswordForm() {
   const { signIn, setActive, isLoaded } = useSignIn();
-  const [password, setPassword] = React.useState('');
-  const [code, setCode] = React.useState('');
-  const codeInputRef = React.useRef<TextInput>(null);
-  const [error, setError] = React.useState({ code: '', password: '' });
+  const [password, setPassword] = useState('');
+  const [code, setCode] = useState('');
+  const codeInputRef = useRef<TextInput>(null);
+  const [error, setError] = useState({ code: '', password: '' });
 
   async function onSubmit() {
     if (!isLoaded) {

@@ -7,15 +7,15 @@ import { Separator } from '@/components/ui/separator';
 import { Text } from '@/components/ui/text';
 import { useSignIn } from '@clerk/clerk-expo';
 import { Link, router } from 'expo-router';
-import * as React from 'react';
+import React, { useState, useRef } from 'react';
 import { type TextInput, View } from 'react-native';
 
 export function SignInForm() {
   const { signIn, setActive, isLoaded } = useSignIn();
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const passwordInputRef = React.useRef<TextInput>(null);
-  const [error, setError] = React.useState<{ email?: string; password?: string }>({});
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const passwordInputRef = useRef<TextInput>(null);
+  const [error, setError] = useState<{ email?: string; password?: string }>({});
 
   async function onSubmit() {
     if (!isLoaded) {
