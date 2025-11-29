@@ -7,6 +7,7 @@ A modern take on the popular game *Guess Who?*
 
 - [Authors](#authors)
 - [Run Locally](#run-locally)
+- [Important Extensions](#important-extensions)
 - [Useful Links](#useful-links)
 
 ## Authors
@@ -48,6 +49,14 @@ Start the server
 ```
 
 Follow the on-screen instructions and use either Expo Go or iOS Simulator
+
+## Important Extensions
+
+| Title    | URLs |
+| -------- | ------- |
+| 🛠️ ESLint | [VSCode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), [Cursor](https://marketplace.cursorapi.com/items/?itemName=dbaeumer.vscode-eslint)  |
+| 📝 Prettier | [VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [Cursor](https://marketplace.cursorapi.com/items/?itemName=esbenp.prettier-vscode)    |
+| 🌬️ Tailwind CSS IntelliSense | [VSCode](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss), [Cursor](https://marketplace.cursorapi.com/items/?itemName=bradlc.vscode-tailwindcss)    |
 
 ## Useful Links
 
