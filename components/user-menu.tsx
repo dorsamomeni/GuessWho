@@ -1,4 +1,3 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -8,6 +7,7 @@ import type { TriggerRef } from '@rn-primitives/popover';
 import { LogOutIcon, PlusIcon, SettingsIcon } from 'lucide-react-native';
 import * as React from 'react';
 import { View } from 'react-native';
+import { UserAvatar } from './user-avatar';
 
 export function UserMenu() {
   const { user } = useUser();
@@ -32,13 +32,8 @@ export function UserMenu() {
             <UserAvatar className="size-10" />
             <View className="flex-1">
               <Text className="font-medium leading-5">
-                {user?.fullName || user?.emailAddresses[0]?.emailAddress}
+                {user?.username}
               </Text>
-              {user?.fullName?.length ? (
-                <Text className="text-sm font-normal leading-4 text-muted-foreground">
-                  {user?.username || user?.emailAddresses[0]?.emailAddress}
-                </Text>
-              ) : null}
             </View>
           </View>
           <View className="flex-row flex-wrap gap-3 py-0.5">
@@ -73,29 +68,5 @@ export function UserMenu() {
         </Button>
       </PopoverContent>
     </Popover>
-  );
-}
-
-function UserAvatar(props: Omit<React.ComponentProps<typeof Avatar>, 'alt'>) {
-  const { user } = useUser();
-
-  const { initials, imageSource, userName } = React.useMemo(() => {
-    const userName = user?.fullName || user?.emailAddresses[0]?.emailAddress || 'Unknown';
-    const initials = userName
-      .split(' ')
-      .map((name) => name[0])
-      .join('');
-
-    const imageSource = user?.imageUrl ? { uri: user.imageUrl } : undefined;
-    return { initials, imageSource, userName };
-  }, [user?.imageUrl, user?.fullName, user?.emailAddresses[0]?.emailAddress]);
-
-  return (
-    <Avatar alt={`${userName}'s avatar`} {...props}>
-      <AvatarImage source={imageSource} />
-      <AvatarFallback>
-        <Text>{initials}</Text>
-      </AvatarFallback>
-    </Avatar>
   );
 }

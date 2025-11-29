@@ -11,7 +11,7 @@ WebBrowser.maybeCompleteAuthSession();
 
 type SocialConnectionStrategy = Extract<
   StartSSOFlowParams['strategy'],
-  'oauth_google' | 'oauth_github' | 'oauth_apple'
+  'oauth_google'
 >;
 
 const SOCIAL_CONNECTION_STRATEGIES: {

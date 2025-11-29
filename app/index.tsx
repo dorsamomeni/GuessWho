@@ -3,7 +3,7 @@ import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { UserMenu } from '@/components/user-menu';
 import { useUser } from '@clerk/clerk-expo';
-import { Link, Stack } from 'expo-router';
+import { Link, Stack, useRouter } from 'expo-router';
 import { MoonStarIcon, XIcon, SunIcon } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import * as React from 'react';
@@ -35,7 +35,21 @@ const SCREEN_OPTIONS = {
 
 export default function Screen() {
   const { colorScheme } = useColorScheme();
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
+  const router = useRouter();
+  const hasRedirectedRef = React.useRef(false);
+
+  React.useEffect(() => {
+    if (
+      isLoaded &&
+      user &&
+      !user.username &&
+      !hasRedirectedRef.current
+    ) {
+      hasRedirectedRef.current = true;
+      router.push('/(auth)/account-setup');
+    }
+  }, [isLoaded, user, router]);
 
   return (
     <>
@@ -52,7 +66,7 @@ export default function Screen() {
         </View>
         <View className="max-w-sm gap-2 px-4">
           <Text variant="h1" className="text-3xl font-medium">
-            Make it yours{user?.firstName ? `, ${user.firstName}` : ''}.
+            Make it yours, {user?.username}.
           </Text>
           <Text className="ios:text-foreground text-center font-mono text-sm text-muted-foreground">
             Update the screens and components to match your design and logic.

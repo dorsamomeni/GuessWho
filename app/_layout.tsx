@@ -37,7 +37,10 @@ function Routes() {
 
   React.useEffect(() => {
     if (isLoaded) {
-      SplashScreen.hideAsync();
+      // Hide splash screen, but catch any errors (e.g., if already hidden or on modal view controllers)
+      SplashScreen.hideAsync().catch(() => {
+        // Ignore errors - splash screen may already be hidden or not available on this view controller
+      });
     }
   }, [isLoaded]);
 
@@ -58,6 +61,7 @@ function Routes() {
       {/* Screens only shown when the user IS signed in */}
       <Stack.Protected guard={isSignedIn}>
         <Stack.Screen name="index" />
+        <Stack.Screen name="(auth)/account-setup" options={ACCOUNT_SETUP_SCREEN_OPTIONS} />
       </Stack.Protected>
 
       {/* Screens outside the guards are accessible to everyone (e.g. not found) */}
@@ -74,6 +78,13 @@ const SIGN_UP_SCREEN_OPTIONS = {
   presentation: 'modal',
   title: '',
   headerTransparent: true,
+  gestureEnabled: false,
+} as const;
+
+const ACCOUNT_SETUP_SCREEN_OPTIONS = {
+  presentation: 'modal',
+  title: '',
+  headerShown: false,
   gestureEnabled: false,
 } as const;
 
