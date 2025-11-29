@@ -8,13 +8,6 @@ A modern take on the popular game *Guess Who?*
 - [@Will Murphy](https://www.github.com/illogicalll)
 - [@Dorsa Momeni](https://www.github.com/dorsamomeni)
 
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your .env file:
-
-- `EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY`
-  - Can be under Configure -> API Keys within the [Clerk Dashboard](https://dashboard.clerk.com/)
-
 ## Run Locally
 
 Clone the project
@@ -34,6 +27,13 @@ Install dependencies
 ```bash
   pnpm install
 ```
+
+### Environment Variables
+
+To run this project, you will need to create a `.env` file and add the following environment variables to it:
+
+- `EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY`
+  - Can be under Configure -> API Keys within the [Clerk Dashboard](https://dashboard.clerk.com/)
 
 Start the server
 
