@@ -3,10 +3,16 @@
 
 A modern take on the popular game *Guess Who?*
 
+## Table of Contents
+
+- [Authors](#authors)
+- [Run Locally](#run-locally)
+- [Useful Links](#useful-links)
+
 ## Authors
 
-- [@Will Murphy](https://www.github.com/illogicalll)
-- [@Dorsa Momeni](https://www.github.com/dorsamomeni)
+- [Will Murphy](https://www.github.com/illogicalll)
+- [Dorsa Momeni](https://www.github.com/dorsamomeni)
 
 ## Run Locally
 
@@ -42,3 +48,10 @@ Start the server
 ```
 
 Follow the on-screen instructions and use either Expo Go or iOS Simulator
+
+## Useful Links
+
+| Title    | URL |
+| -------- | ------- |
+| 🎨 Figma Design and Inspiration Board  | [Link](https://www.figma.com/design/KNN8MPHZ34HEpmejMemJET/Guess-Who)   |
+| 👤 Clerk Authentication and User Management Dashboard | [Link](https://dashboard.clerk.com/apps/app_366r2g03bSVzd6ENifiInBAmTyU/instances/ins_366r2jygq9dTjIMFOsyIFtQkQtB)    |

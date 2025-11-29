@@ -19,6 +19,7 @@ import {
 } from './ui/card';
 import { UserAvatar } from './user-avatar';
 import { pickImage } from '@/utils/pick-image';
+import { getErrorMessage } from '@/utils/getErrorMessage';
 
 export function AccountSetupForm({ onComplete }: { onComplete?: () => void }) {
   const { user, isLoaded } = useUser();
@@ -86,13 +87,9 @@ export function AccountSetupForm({ onComplete }: { onComplete?: () => void }) {
       } else {
         router.back();
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       setLoading(false);
-      setError(
-        err?.errors?.[0]?.message ||
-          err.message ||
-          'Failed to update username.'
-      );
+      setError(getErrorMessage(err));
     }
   };
 

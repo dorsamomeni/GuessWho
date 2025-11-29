@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 export function useCountdown(seconds = 30) {
   const [countdown, setCountdown] = useState(seconds);

@@ -1,6 +1,7 @@
-import { Alert } from "react-native";
+import { Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import type { UserResource } from '@clerk/types';
+import { getErrorMessage } from './getErrorMessage';
 
 export const pickImage = async (
   isLoaded: boolean,
@@ -14,21 +15,24 @@ export const pickImage = async (
 
   const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
   if (status !== 'granted') {
-    Alert.alert('Permission Required', 'Sorry, we need camera roll permissions to select an image!');
+    Alert.alert(
+      'Permission Required',
+      'Sorry, we need camera roll permissions to select an image!'
+    );
     return;
   }
 
   const result = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    mediaTypes: ['images'],
     allowsEditing: true,
     aspect: [1, 1],
     quality: 0.8,
     base64: true,
-  });
+  });  
 
   if (!result.canceled && result.assets && result.assets.length > 0) {
     const asset = result.assets[0];
-    
+
     if (!asset.base64) {
       Alert.alert('Error', 'Failed to process image. Please try again.');
       return;
@@ -38,12 +42,12 @@ export const pickImage = async (
     try {
       const mimeType = asset.mimeType || 'image/jpeg';
       const dataUri = `data:${mimeType};base64,${asset.base64}`;
-      
+
       await user.setProfileImage({ file: dataUri });
       setUploadingImage(false);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setUploadingImage(false);
-      Alert.alert('Error', err?.message || 'Failed to update profile picture.');
+      Alert.alert('Error', getErrorMessage(err));
     }
   }
 };
